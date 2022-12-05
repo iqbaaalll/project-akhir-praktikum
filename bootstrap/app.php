@@ -23,6 +23,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -105,6 +107,13 @@ $app->configure('app');
 | can respond to, as well as the controllers that may handle them.
 |
 */
+$app->middleware([ 
+    App\Http\Middleware\CorsMiddleware::class
+]);
+
+$app->routeMiddleware([
+    'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
+  ]);
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

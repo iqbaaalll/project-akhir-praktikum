@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -20,7 +21,7 @@ class Mahasiswa extends Model implements AuthenticatableContract, AuthorizableCo
      * @var string[]
      */
     protected $fillable = [
-        'nama', 'angkatan'
+        'nim', 'nama', 'prodiId', 'angkatan', 'password',
     ];
 
     /**
@@ -29,15 +30,15 @@ class Mahasiswa extends Model implements AuthenticatableContract, AuthorizableCo
      * @var string[]
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
 
-    public function prodis()
+    public function prodi()
     {
-        return $this->hasMany(Prodi::class, 'mhsNim');
+        return $this->belongsTo(Prodi::class);
     }
 
-    public function matakuliahs()
+    public function matakuliah()
     {
         return $this->belongsToMany(Matakuliah::class, 'mahasiswa_matakuliah', 'mhsNim', 'mkId');
     }

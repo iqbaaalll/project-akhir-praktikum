@@ -20,7 +20,6 @@ class Prodi extends Model implements AuthenticatableContract, AuthorizableContra
      */
     protected $fillable = [
         'nama',
-        'mhsNim'
     ];
 
     /**
@@ -30,8 +29,8 @@ class Prodi extends Model implements AuthenticatableContract, AuthorizableContra
      */
     protected $hidden = [];
 
-    public function mahasiswas()
+    public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mhsNim');
+        return $this->hasMany(Mahasiswa::class);
     }
 }
